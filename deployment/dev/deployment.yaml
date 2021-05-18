@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: post-service
+  name: post-service
+  namespace: aibles-social
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: post-service
+  template:
+    metadata:
+      labels:
+        app: post-service
+    spec:
+      containers:
+        - image: us.gcr.io/aibles-social/post-service:latest
+          name: post-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8091
+          env:
+            - name: APP_PORT
+              value: "8091"
+          envFrom:
+            - configMapRef:
+                name: server-config
+      imagePullSecrets:
+        - name: regcred

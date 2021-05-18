@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: post-service
+  name: post-service
+  namespace: aibles-social
+spec:
+  selector:
+    app: post-service
+  ports:
+    - protocol: TCP
+      port: 8091
+      targetPort: 8091

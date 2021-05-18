@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- namespace.yaml
+- deployment.yaml
+- ingress.yaml
+- service.yaml
+namespace: aibles-social
+images:
+- name: us.gcr.io/aibles-social/post-service
+  newTag: b5d1b691071c2417aa72c446a39158ca87fe7594

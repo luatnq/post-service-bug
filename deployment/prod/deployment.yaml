@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: post-service
+  name: post-service
+  namespace: post-service-prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: post-service
+  template:
+    metadata:
+      labels:
+        app: post-service
+    spec:
+      containers:
+        - image: us.gcr.io/it-social-network/post-service:latest
+          name: post-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8091
+          env:
+            - name: APP_PORT
+              value: "8091"
+      imagePullSecrets:
+        - name: regcred

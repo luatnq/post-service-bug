@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: post-service
+  namespace: post-service-prod
+  labels:
+    app: post-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - host: prod.post-service.aibles.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: post-service
+          servicePort: 8091
